@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Angular Directives</h1>
     <p
-        appStyle="red"
+        appStyle="crimson"
         [dStyles]="{
             border: '3px solid blue',
 
@@ -22,4 +22,16 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
         quibusdam.
     </p>
+
+    <button class="btn" (click)="isVisible = !isVisible">Toggle</button>
+
+    <div class="wrap" *appIfnot="!isVisible">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+    </div>
+
+    <ng-template [appIfnot]="!isVisible">
+        <div class="wrap">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        </div>
+    </ng-template>
 </div>

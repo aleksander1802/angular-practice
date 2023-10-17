@@ -8,7 +8,7 @@ import {
 
 @Directive({ selector: '[appStyle]' })
 export class StyleDirective {
-    @Input('appStyle') color = 'blue';
+    @Input('appStyle') color = 'cyan';
     @Input() dStyles:
         | {
               border?: string;
@@ -18,10 +18,6 @@ export class StyleDirective {
         | undefined;
 
     constructor(private elRef: ElementRef, private renderer: Renderer2) {}
-
-    @HostListener('click', ['$event']) onClick(el: Element) {
-        console.log(el);
-    }
 
     @HostListener('mouseenter') onEnter() {
         this.renderer.setStyle(this.elRef.nativeElement, 'color', this.color);
