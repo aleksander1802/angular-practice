@@ -11,25 +11,4 @@ export interface Post {
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-    posts: Post[] = [
-        {
-            id: 1,
-            title: 'Angular components',
-            text: "I'm still learning",
-        },
-        {
-            id: 2,
-            title: 'Next article',
-            text: 'About directives and pipes',
-        },
-    ];
-
-    updatePosts(post: Post) {
-        this.posts.unshift(post);
-    }
-
-    removePost(id: number) {
-        this.posts = this.posts.filter((post) => post.id !== id);
-    }
-}
+export class AppComponent {}
