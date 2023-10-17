@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Post } from '../app.component';
 
 @Component({
@@ -8,4 +8,9 @@ import { Post } from '../app.component';
 })
 export class PostComponent {
     @Input() post: Post | undefined;
+    @Output() removePostById = new EventEmitter<number>();
+
+    removePost() {
+        this.removePostById.emit(this.post?.id);
+    }
 }
