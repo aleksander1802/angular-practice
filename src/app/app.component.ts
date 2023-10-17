@@ -24,4 +24,8 @@ export class AppComponent {
             text: 'About directives and pipes',
         },
     ];
+
+    updatePosts(post: Post) {
+        this.posts.unshift(post);
+    }
 }
