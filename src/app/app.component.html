@@ -4,7 +4,13 @@
     <p>{{ e | number : "3.1-2" }}</p>
     <p>{{ e | number : "1.0-0" }}</p>
     <p>{{ str }}</p>
-    <p>{{ str | uppercase }}</p>
-    <p>{{ str | lowercase }}</p>
-    <p>{{ str | titlecase }}</p>
+    <p>uppercase: {{ str | uppercase }}</p>
+    <p>lowercase: {{ str | lowercase }}</p>
+    <p>titlecase: {{ str | titlecase }}</p>
+    <p>date: {{ date | date }}</p>
+    <p>fullDate: {{ date | date : "fullDate" }}</p>
+    <p>longDate: {{ date | date : "long" }}</p>
+    <p>longDate: {{ date | date : "longDate" }}</p>
+    <p>d MMMM yyyy: {{ date | date : "d MMMM yyyy" }}</p>
+    <p>d MMMM yyyy HH:mm:ss: {{ date | date : "d MMMM yyyy, HH:mm:ss" }}</p>
 </div>
