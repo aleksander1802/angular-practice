@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 export interface Post {
     title: string;
     text: string;
-    id?: number;
 }
 
 @Component({
@@ -12,9 +11,14 @@ export interface Post {
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    e: number = Math.E;
+    search = '';
 
-    str = 'Hello world';
+    searchFiled: keyof Post = 'title';
 
-    date: Date = new Date();
+    posts: Post[] = [
+        { title: 'Beer', text: 'Самое лучшее в мире' },
+        { title: 'Bread', text: 'Самый лучший в мире хлеб' },
+        { title: 'JavaScript', text: 'Самый лучший в мире язык' },
+        { title: 'TypeScript', text: 'Самый лучший в мире язык типизации' },
+    ];
 }
