@@ -3,8 +3,14 @@
         <h1>Angular Forms</h1>
 
         <div class="form-control">
-            <label [htmlFor]="">Email</label>
-            <input type="text" placeholder="Email" formControlName="email" />
+            <label [htmlFor]="'email'">Email</label>
+            <input
+                type="text"
+                placeholder="Email"
+                formControlName="email"
+                name="email"
+                id="email"
+            />
             <div
                 class="validation"
                 *ngIf="
@@ -22,11 +28,13 @@
         </div>
 
         <div class="form-control">
-            <label [htmlFor]="">Пароль</label>
+            <label [htmlFor]="'password'">Пароль</label>
             <input
                 type="password"
                 placeholder="Пароль"
                 formControlName="password"
+                name="password"
+                id="password"
             />
 
             <div
@@ -43,22 +51,20 @@
                 <small *ngIf="form.get('password')?.errors?.['minlength']"
                     >Длина должна быть не менее
                     {{form.get('password')?.errors?.['minlength']?.['requiredLength']
-
                     }}. Сейчас количество символов
                     {{form.get('password')!.errors?.['minlength']?.['actualLength']
-
                     }}.</small
                 >
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" formGroupName="address">
             <h2>Адрес</h2>
 
             <div class="form-control">
                 <label [htmlFor]="">Страна</label>
 
-                <select>
+                <select formControlName="country">
                     <option value="ru">Россия</option>
                     <option value="ua">Украина</option>
                     <option value="by">Беларусь</option>
@@ -66,7 +72,7 @@
             </div>
 
             <div class="form-control">
-                <input type="text" />
+                <input type="text" placeholder="Город" formControlName="city" />
             </div>
 
             <button class="btn" type="button">Выбрать столицу</button>
