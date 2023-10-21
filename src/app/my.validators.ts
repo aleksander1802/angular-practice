@@ -1,4 +1,10 @@
-import { FormControl } from '@angular/forms';
+import {
+    AbstractControl,
+    AsyncValidatorFn,
+    FormControl,
+    ValidationErrors,
+} from '@angular/forms';
+import { Observable } from 'rxjs';
 
 export class MyValidators {
     static restrictedEmail(
@@ -11,5 +17,21 @@ export class MyValidators {
         }
 
         return null;
+    }
+
+    static uniqueEmail(): AsyncValidatorFn {
+        return (
+            control: AbstractControl,
+        ):
+        | Promise<ValidationErrors | null>
+        | Observable<ValidationErrors | null> => new Promise((resolve) => {
+            setTimeout(() => {
+                if (control.value === 'async@mail.ru') {
+                    resolve({ uniqueEmail: true });
+                } else {
+                    resolve(null);
+                }
+            }, 1000);
+        });
     }
 }
