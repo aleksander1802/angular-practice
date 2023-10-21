@@ -24,6 +24,9 @@
                 <small *ngIf="form.get('email')?.errors?.['email']"
                     >Введите корректный email</small
                 >
+                <small *ngIf="form.get('email')?.errors?.['restrictedEmail']"
+                    >Email {{form.get('email')?.value}} запрещён</small
+                >
             </div>
         </div>
 
@@ -51,10 +54,8 @@
                 <small *ngIf="form.get('password')?.errors?.['minlength']"
                     >Длина должна быть не менее
                     {{form.get('password')?.errors?.['minlength']?.['requiredLength']
-
                     }}. Сейчас количество символов
                     {{form.get('password')!.errors?.['minlength']?.['actualLength']
-
                     }}.</small
                 >
             </div>
