@@ -51,8 +51,10 @@
                 <small *ngIf="form.get('password')?.errors?.['minlength']"
                     >Длина должна быть не менее
                     {{form.get('password')?.errors?.['minlength']?.['requiredLength']
+
                     }}. Сейчас количество символов
                     {{form.get('password')!.errors?.['minlength']?.['actualLength']
+
                     }}.</small
                 >
             </div>
@@ -75,16 +77,29 @@
                 <input type="text" placeholder="Город" formControlName="city" />
             </div>
 
-            <button class="btn" type="button" (click)="setCapital()">Выбрать столицу</button>
+            <button class="btn" type="button" (click)="setCapital()">
+                Выбрать столицу
+            </button>
         </div>
 
-        <div class="card">
+        <div class="card" [formArrayName]="'skills'">
             <h2>Ваши навыки</h2>
-            <button class="btn" type="button">Добавить умение</button>
-            <div class="form-control">
-                <label [htmlFor]=""></label>
-                <input type="text" />
-            </div>
+            <button class="btn" type="button" (click)="addSkill()">
+                Добавить умение
+            </button>
+
+            <ng-container
+                *ngFor="let skill of skillsFormArray.controls; let i = index"
+            >
+                <div class="form-control">
+                    <label [for]="'skills' + i">Умение {{ i + 1 }}</label>
+                    <input
+                        type="text"
+                        [formControlName]="i"
+                        [id]="'skills' + i"
+                    />
+                </div>
+            </ng-container>
         </div>
 
         <button class="btn" [disabled]="form.invalid">Отправить</button>
