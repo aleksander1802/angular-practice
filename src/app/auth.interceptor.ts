@@ -1,18 +1,27 @@
 import {
     HttpEvent,
+    HttpEventType,
     HttpHandler,
     HttpInterceptor,
     HttpRequest,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 export class AuthInterceptor implements HttpInterceptor {
     intercept(
         req: HttpRequest<unknown>,
         next: HttpHandler,
     ): Observable<HttpEvent<unknown>> {
-        console.log('Intercepting request', req);
+        const cloned = req.clone({
+            headers: req.headers.append('Authorization', 'Basic RANDOM Token'),
+        });
 
-        return next.handle(req);
+        return next.handle(cloned).pipe(
+            tap((event) => {
+                if (event.type === HttpEventType.Response) {
+                    console.log('Intercepting response', event);
+                }
+            }),
+        );
     }
 }
