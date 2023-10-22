@@ -25,7 +25,7 @@
                         >
                             Удалить
                         </button>
-                        <button class="btn" [disabled]="todo.completed">
+                        <button class="btn" [disabled]="todo.completed" (click)="completeTodo(todo.id)">
                             Завершить
                         </button>
                     </span>
