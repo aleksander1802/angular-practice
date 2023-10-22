@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, delay, throwError } from 'rxjs';
 
@@ -15,9 +15,15 @@ export class TodosService {
     constructor(private http: HttpClient) {}
 
     addTodo(todo: Todo) {
+        const headers = new HttpHeaders({
+            MyCustomHeader: Math.random().toString(),
+        });
         return this.http.post<Todo>(
             'https://jsonplaceholder.typicode.com/todos',
             todo,
+            {
+                headers,
+            },
         );
     }
 
@@ -26,11 +32,7 @@ export class TodosService {
             .get<Todo[]>('https://jsonplaceholder.typicode.com/todos?_limit=2')
             .pipe(
                 delay(500),
-                catchError((error) => {
-                    console.log('Error:', error.message);
-
-                    return throwError(() => new Error(error.message));
-                }),
+                catchError((error) => throwError(() => new Error(error.message))),
             );
     }
 
@@ -41,16 +43,12 @@ export class TodosService {
     }
 
     completeTodo(id?: number) {
-        return this.http.put<Todo>(
-            `https://jsonplaceholder.typicode.com/todos/${id}`,
-            { completed: true },
-        ).pipe(
-
-            catchError((error) => {
-                console.log('Error:', error.message);
-
-                return throwError(() => new Error(error.message));
-            }),
-        );
+        return this.http
+            .put<Todo>(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            completed: true,
+        })
+            .pipe(
+                catchError((error) => throwError(() => new Error(error.message))),
+            );
     }
 }
