@@ -97,6 +97,9 @@ img {
         span.completed {
             text-decoration: line-through;
         }
+        span {
+            max-width: 600px;
+        }
     }
 }
 
