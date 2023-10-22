@@ -1,12 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs';
-
-export interface Todo {
-    title: string;
-    completed: boolean;
-    id?: number;
-}
+import { Todo, TodosService } from './services/todos.service';
 
 @Component({
     selector: 'app-root',
@@ -14,7 +7,7 @@ export interface Todo {
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-    constructor(private http: HttpClient) {}
+    constructor(private todosService: TodosService) {}
 
     todos: Todo[] = [];
 
@@ -36,31 +29,23 @@ export class AppComponent implements OnInit {
             completed: false,
         };
 
-        this.http
-            .post<Todo>('https://jsonplaceholder.typicode.com/todos', newTodo)
-            .subscribe((response) => {
-                this.todos.push(response);
-                this.todoTitle = '';
-            });
+        this.todosService.addTodo(newTodo).subscribe((todo) => {
+            this.todos.push(todo);
+            this.todoTitle = '';
+        });
     }
 
     fetchTodos() {
         this.loading = true;
-        this.http
-            .get<Todo[]>('https://jsonplaceholder.typicode.com/todos?_limit=2')
-            .pipe(delay(1500))
-            .subscribe((response) => {
-                this.todos = response;
-                this.loading = false;
-            });
+        this.todosService.fetchTodos().subscribe((response) => {
+            this.todos = response;
+            this.loading = false;
+        });
     }
 
     removeTodo(id?: number) {
-        this.http
-            .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-            .subscribe((response) => {
-                console.log(response);
-                this.todos = this.todos.filter((todo) => todo.id !== id);
-            });
+        this.todosService.removeTodo(id).subscribe(() => {
+            this.todos = this.todos.filter((todo) => todo.id !== id);
+        });
     }
 }
