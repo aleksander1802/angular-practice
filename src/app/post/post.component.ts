@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Post, PostsService } from '../posts.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from '../posts.service';
 
 @Component({
     selector: 'app-post',
@@ -10,22 +10,23 @@ import { Post, PostsService } from '../posts.service';
 export class PostComponent implements OnInit {
     post!: Post;
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private postsService: PostsService,
-    ) {}
+    constructor(private route: ActivatedRoute, private router: Router) {}
 
-    ngOnInit() {
-        this.route.params.subscribe((params: Params) => {
-            const postId = params['id'];
-            const foundPost = this.postsService.getById(+postId);
-            if (foundPost) {
-                this.post = foundPost;
-            } else {
-                throw new Error('Posts not found');
-            }
+    ngOnInit(): void {
+        // this.post = this.route.snapshot.data['post'];
+
+        this.route.data.subscribe((data) => {
+            this.post = data['post'];
         });
+        // this.route.params.subscribe((params: Params) => {
+        //     const postId = params['id'];
+        //     const foundPost = this.postsService.getById(+postId);
+        //     if (foundPost) {
+        //         this.post = foundPost;
+        //     } else {
+        //         throw new Error('Posts not found');
+        //     }
+        // });
     }
 
     loadPost() {

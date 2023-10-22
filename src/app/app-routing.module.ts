@@ -6,6 +6,7 @@ import { PostsComponent } from './posts/posts.component';
 import { PostComponent } from './post/post.component';
 import { AboutExtraComponent } from './about-extra/about-extra.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { PostResolver } from './post.resolver';
 
 const routes: Routes = [
     {
@@ -24,6 +25,9 @@ const routes: Routes = [
     {
         path: 'posts/:id',
         component: PostComponent,
+        resolve: {
+            post: PostResolver,
+        },
     },
     {
         path: 'error',
