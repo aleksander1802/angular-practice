@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
     loading = false;
 
+    error = '';
+
     ngOnInit() {
         this.fetchTodos();
     }
@@ -37,10 +39,15 @@ export class AppComponent implements OnInit {
 
     fetchTodos() {
         this.loading = true;
-        this.todosService.fetchTodos().subscribe((response) => {
-            this.todos = response;
-            this.loading = false;
-        });
+        this.todosService.fetchTodos().subscribe(
+            (response) => {
+                this.todos = response;
+                this.loading = false;
+            },
+            (error) => {
+                this.error = error.message;
+            },
+        );
     }
 
     removeTodo(id?: number) {
@@ -50,9 +57,14 @@ export class AppComponent implements OnInit {
     }
 
     completeTodo(id?: number) {
-        return this.todosService.completeTodo(id).subscribe((todo) => {
-            console.log(todo);
-            this.todos.find((t) => t.id === todo.id)!.completed = true;
-        });
+        return this.todosService.completeTodo(id).subscribe(
+            (todo) => {
+                console.log(todo);
+                this.todos.find((t) => t.id === todo.id)!.completed = true;
+            },
+            (error) => {
+                this.error = error.message;
+            },
+        );
     }
 }

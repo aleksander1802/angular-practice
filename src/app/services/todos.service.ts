@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay } from 'rxjs';
+import { catchError, delay, throwError } from 'rxjs';
 
 export interface Todo {
     title: string;
@@ -24,7 +24,14 @@ export class TodosService {
     fetchTodos() {
         return this.http
             .get<Todo[]>('https://jsonplaceholder.typicode.com/todos?_limit=2')
-            .pipe(delay(500));
+            .pipe(
+                delay(500),
+                catchError((error) => {
+                    console.log('Error:', error.message);
+
+                    return throwError(() => new Error(error.message));
+                }),
+            );
     }
 
     removeTodo(id?: number) {
@@ -37,6 +44,13 @@ export class TodosService {
         return this.http.put<Todo>(
             `https://jsonplaceholder.typicode.com/todos/${id}`,
             { completed: true },
+        ).pipe(
+
+            catchError((error) => {
+                console.log('Error:', error.message);
+
+                return throwError(() => new Error(error.message));
+            }),
         );
     }
 }
