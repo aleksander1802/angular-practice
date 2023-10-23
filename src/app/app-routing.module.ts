@@ -1,46 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { PostsComponent } from './posts/posts.component';
-import { PostComponent } from './post/post.component';
-import { AboutExtraComponent } from './about-extra/about-extra.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
-import { PostResolver } from './post.resolver';
-
-const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent,
-    },
-    {
-        path: 'about',
-        component: AboutComponent,
-        children: [{ path: 'extra', component: AboutExtraComponent }],
-    },
-    {
-        path: 'posts',
-        component: PostsComponent,
-    },
-    {
-        path: 'posts/:id',
-        component: PostComponent,
-        resolve: {
-            post: PostResolver,
-        },
-    },
-    {
-        path: 'error',
-        component: ErrorPageComponent,
-    },
-    {
-        path: '**',
-        redirectTo: 'error',
-    },
-];
+import { RouterModule } from '@angular/router';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { AboutExtraPageComponent } from './about-page/about-extra-page/about-extra-page.component';
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        RouterModule.forRoot([
+            {
+                path: 'about',
+                component: AboutPageComponent,
+                children: [
+                    { path: 'extra', component: AboutExtraPageComponent },
+                ],
+            },
+            { path: '', component: HomePageComponent, pathMatch: 'full' },
+        ]),
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
