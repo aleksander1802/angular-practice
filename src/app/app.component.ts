@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ModalComponent } from './modal/modal.component';
+import { RefDirective } from './ref.directive';
 
 @Component({
     selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    modal = false;
+    @ViewChild(RefDirective) refDir!: RefDirective;
+
+    showModal() {
+        const component = this.refDir.containerRef.createComponent(ModalComponent);
+
+        component.instance.title = 'Dynamic title';
+        component.instance.closeModal.subscribe(() => {
+            this.refDir.containerRef.clear();
+        });
+    }
 }
