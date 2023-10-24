@@ -1,5 +1,6 @@
-<div class="wrap">
-    <h1>Angular Animations</h1>
+<button (click)="animate()">Animate</button>
 
-    <div class="box"></div>
+<hr />
+<div class="wrap">
+    <div class="box" [@box]="boxState">Animation</div>
 </div>
