@@ -1,5 +1,6 @@
 import {
     animate,
+    group,
     state,
     style,
     transition,
@@ -39,13 +40,22 @@ import { Component } from '@angular/core';
             ]),
             transition(':leave', [
                 style({ opacity: 1 }),
-                animate(
-                    750,
-                    style({
-                        opacity: 0,
-                        transform: 'scale(1.2)',
-                    }),
-                ),
+                group([
+                    animate(
+                        750,
+                        style({
+                            opacity: 0,
+                            transform: 'scale(1.2)',
+                        }),
+                    ),
+                    animate(
+                        300,
+                        style({
+                            color: '#000',
+                            fontWeight: 'bold',
+                        }),
+                    ),
+                ]),
             ]),
         ]),
     ],
