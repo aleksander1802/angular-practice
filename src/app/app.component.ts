@@ -7,6 +7,7 @@ import {
     style,
     transition,
     trigger,
+    AnimationEvent,
 } from '@angular/animations';
 import { Component } from '@angular/core';
 
@@ -88,5 +89,13 @@ export class AppComponent {
 
     animate() {
         this.boxState = this.boxState === 'start' ? 'end' : 'start';
+    }
+
+    animationStarted(event: AnimationEvent) {
+        console.log('animationStarted', event);
+    }
+
+    animationDone(event: AnimationEvent) {
+        console.log('animationDone', event);
     }
 }
