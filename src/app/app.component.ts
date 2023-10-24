@@ -1,6 +1,7 @@
 import {
     animate,
     group,
+    keyframes,
     query,
     state,
     style,
@@ -48,8 +49,15 @@ import { Component } from '@angular/core';
             ]),
 
             transition(':enter', [
-                style({ opacity: 0 }),
-                animate('850ms ease-out'),
+                animate(
+                    '4s',
+                    keyframes([
+                        style({ background: 'crimson', offset: 0 }),
+                        style({ background: 'yellow', offset: 0.2 }),
+                        style({ background: 'black', offset: 0.3 }),
+                        style({ background: 'cyan', offset: 1 }),
+                    ]),
+                ),
             ]),
             transition(':leave', [
                 style({ opacity: 1 }),
