@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isSubmited">
         Войти
     </button>
 </form>
