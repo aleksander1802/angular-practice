@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
     isSubmited = false;
 
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(public authService: AuthService, private router: Router) {}
 
     ngOnInit() {
         this.form = new FormGroup({
@@ -41,10 +41,15 @@ export class LoginPageComponent implements OnInit {
             password: this.form.value.password,
         };
 
-        this.authService.login(user).subscribe(() => {
-            this.form.reset();
-            this.router.navigate(['/admin', 'dashboard']);
-            this.isSubmited = false;
-        });
+        this.authService.login(user).subscribe(
+            () => {
+                this.form.reset();
+                this.router.navigate(['/admin', 'dashboard']);
+                this.isSubmited = false;
+            },
+            () => {
+                this.isSubmited = false;
+            },
+        );
     }
 }
