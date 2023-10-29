@@ -24,7 +24,9 @@ export class PostsService {
 
     getAll(): Observable<Post[]> {
         return this.http
-            .get<{ [key: string]: Post }>(`${environment.fireBaseDataBaseURL}/posts.json`)
+            .get<{ [key: string]: Post }>(
+            `${environment.fireBaseDataBaseURL}/posts.json`,
+        )
             .pipe(
                 map((response) => Object.keys(response).map((key) => ({
                     ...response[key],
@@ -32,5 +34,11 @@ export class PostsService {
                     date: new Date(response[key].date),
                 }))),
             );
+    }
+
+    remove(id: string) {
+        return this.http.delete(
+            `${environment.fireBaseDataBaseURL}/posts/${id}.json`,
+        );
     }
 }
