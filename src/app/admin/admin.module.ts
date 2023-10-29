@@ -7,7 +7,6 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
-import { AuthService } from './shared/services/auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard, PermissionsService } from './shared/services/auth.guard';
 
@@ -58,6 +57,6 @@ import { AuthGuard, PermissionsService } from './shared/services/auth.guard';
         ]),
     ],
     exports: [RouterModule, SharedModule],
-    providers: [AuthService, PermissionsService],
+    providers: [PermissionsService],
 })
 export class AdminModule {}

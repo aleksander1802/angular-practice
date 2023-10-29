@@ -14,13 +14,11 @@ export class PostsService {
         return this.http
             .post(`${environment.fireBaseDataBaseURL}/posts.json`, post)
             .pipe(
-                map((response: FirebaseCreateResponse) => {
-                    return {
-                        ...post,
-                        id: response.name,
-                        date: new Date(post.date),
-                    };
-                }),
+                map((response: FirebaseCreateResponse) => ({
+                    ...post,
+                    id: response.name,
+                    date: new Date(post.date),
+                })),
             );
     }
 }
