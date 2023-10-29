@@ -22,6 +22,7 @@ import { AuthGuard, PermissionsService } from './shared/services/auth.guard';
     imports: [
         CommonModule,
         FormsModule,
+        SharedModule,
         ReactiveFormsModule,
         RouterModule.forChild([
             {

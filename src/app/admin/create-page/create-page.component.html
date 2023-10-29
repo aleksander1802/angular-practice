@@ -14,14 +14,15 @@
             *ngIf="form.get('title')?.touched && form.get('title')?.invalid"
         >
             <small *ngIf="form.get('title')?.errors?.['required']">
-                Введите название поста 
+                Введите название поста
             </small>
-            
         </div>
     </div>
 
     <div class="form-control">
-        <label for=""></label>
+        <label for="text">Контент поста:</label>
+        <quill-editor formControlName="text" name="text" id="text">
+        </quill-editor>
     </div>
 
     <div
@@ -39,10 +40,10 @@
             <small *ngIf="form.get('author')?.errors?.['required']">
                 Введите автора поста
             </small>
-            
         </div>
     </div>
 
-    <button class="btn btn-block btn-dark" [disabled]="form.invalid">Создать пост</button>
-
+    <button class="btn btn-block btn-dark" [disabled]="form.invalid">
+        Создать пост
+    </button>
 </form>
