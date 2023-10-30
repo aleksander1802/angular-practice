@@ -10,6 +10,8 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard, PermissionsService } from './shared/services/auth.guard';
 import { SearchPostsPipe } from './shared/pipes/search.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { AlertService } from './shared/services/alert.service';
 
 @NgModule({
     declarations: [
@@ -19,6 +21,7 @@ import { SearchPostsPipe } from './shared/pipes/search.pipe';
         CreatePageComponent,
         EditPageComponent,
         SearchPostsPipe,
+        AlertComponent,
     ],
     imports: [
         CommonModule,
@@ -59,6 +62,6 @@ import { SearchPostsPipe } from './shared/pipes/search.pipe';
         ]),
     ],
     exports: [RouterModule, SharedModule],
-    providers: [PermissionsService],
+    providers: [PermissionsService, AlertService],
 })
 export class AdminModule {}

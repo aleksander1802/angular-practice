@@ -4,6 +4,7 @@ import { Subscription, switchMap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Post } from 'src/app/shared/interfaces/form.interface';
 import { PostsService } from '../shared/services/posts.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
     selector: 'app-edit-page',
@@ -22,6 +23,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private postsService: PostsService,
+        private alertService: AlertService,
     ) {}
 
     ngOnInit(): void {
@@ -57,6 +59,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
             })
             .subscribe(() => {
                 this.isSubmitted = false;
+                this.alertService.warning('Пост был изменён');
             });
     }
 }
