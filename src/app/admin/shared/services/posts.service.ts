@@ -36,6 +36,18 @@ export class PostsService {
             );
     }
 
+    getById(id: string): Observable<Post> {
+        return this.http
+            .get<Post>(`${environment.fireBaseDataBaseURL}/posts/${id}.json`)
+            .pipe(
+                map((post: Post) => ({
+                    ...post,
+                    id,
+                    date: new Date(post.date),
+                })),
+            );
+    }
+
     remove(id: string) {
         return this.http.delete(
             `${environment.fireBaseDataBaseURL}/posts/${id}.json`,
