@@ -48,6 +48,13 @@ export class PostsService {
             );
     }
 
+    update(post: Post): Observable<Post> {
+        return this.http.patch<Post>(
+            `${environment.fireBaseDataBaseURL}/posts/${post.id}.json`,
+            post,
+        );
+    }
+
     remove(id: string) {
         return this.http.delete(
             `${environment.fireBaseDataBaseURL}/posts/${id}.json`,
