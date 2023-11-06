@@ -11,6 +11,7 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { ExampleComponent } from './example/example.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -27,6 +28,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
         HomePageComponent,
         PostPageComponent,
         PostComponent,
+        ExampleComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, SharedModule],
     providers: [INTERCEPTOR_PROVIDER],
